@@ -39,22 +39,34 @@
 ;;
 ;;============================================================
 (defun parser (c)
-    (let((andy '(and ))(ordy '(or )));;depende para cada caso
+    (let((caux ())(andy '(and ))(ordy '(or )) (aux ())(auxstr ()) (answ ()));;depende para cada caso
         (case (first c)
             ('and ;;consulta compuesta
-                (setq c (rest c))
-                (if (listp (first c))
-                    (setq andy (append andy (list (parser))))
+                (setq caux (rest c))
+                (if (listp (first caux))
+                    (setq andy (append andy (list (parser caux))))
                 )
             )
             ('or ;;consulta compuesta
-                (setq c (rest c))
-                (if (listp (first c))
-                    (setq ordy (append ordy (list (parser))))
+                (setq caux (rest c))
+                (if (listp (first caux))
+                    (setq ordy (append ordy (list (parser caux))))
                 )
             )
-            (t ;;consulta simple
+            (NIL ;;si ya se terminaron los casos termino
                 
+            )
+            (t ;;consulta simple
+                (setq aux (first c));;obtengo la primer consulta
+                (setq c (rest c));;modifico la variable que contiene las consultas
+                (setq auxstr (string (rest  aux)));;guardo en cadena la condicion
+                (if (equal #\[ (char auxtr 0))
+                    ();;algo
+                    ;;else
+                    (progn 
+                        (setq answ (list 'equal (list 'rest (list 'assoc (first aux) 'aux)) (rest aux) ))    
+                    )
+                )
             )
             
         )
