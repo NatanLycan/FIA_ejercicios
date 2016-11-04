@@ -31,22 +31,52 @@
 )
 ;;(read-k "C:/Users/Nathaniel/Documents/GitHub/FIA_ejercicios/pokemon/knowledge.txt")
 
+;;============================================================
+;;
+;;  Parser - Recursiva
+;;
+;;  Cambia la estructura de las condiciones de humano a como se van a procesar
+;;
+;;============================================================
+(defun parser (c)
+    (let((andy '(and ))(ordy '(or )));;depende para cada caso
+        (case (first c)
+            ('and ;;consulta compuesta
+                (setq c (rest c))
+                (if (listp (first c))
+                    (setq andy (append andy (list (parser))))
+                )
+            )
+            ('or ;;consulta compuesta
+                (setq c (rest c))
+                (if (listp (first c))
+                    (setq ordy (append ordy (list (parser))))
+                )
+            )
+            (t ;;consulta simple
+                
+            )
+            
+        )
+    )
+)
+
 
 ;;============================================================
 ;;
 ;;  Fase1
 ;;
-;;  Separa la consulta de entrada para su posterior analisis
+;;  Separa la consulta de entrada para su posterior analisisif 
 ;;
 ;;============================================================
 
 (defun fase1 (c)
-    (let ((funcion (first c)) (clase (second c)) (condiciones (third c)))
+    (let ((funcion (first c)) (clase (second c)) (condiciones (third c)) (condi ()))
         (format t "~% Funcion usada ~A ~%" funcion)
         (format t "Clase solicitada ~A ~%" (rest clase))
         (format t "Condiciones ~A ~% ~%" condiciones)
-        
-    )
+        (setq condi (parser c))
+    )   
 )
 
 
