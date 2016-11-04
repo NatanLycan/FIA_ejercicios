@@ -78,7 +78,7 @@
 ;;
 ;;  Fase1
 ;;
-;;  Separa la consulta de entrada para su posterior analisisif 
+;;  Separa la consulta de entrada para su posterior analisis 
 ;;
 ;;============================================================
 
