@@ -177,6 +177,7 @@
                         (setq cad (concatenate 'string (subseq cad 0 (search "or" cad)) " " (subseq cad (+ 2 (search "or" cad)) )))
                         (setq w :or)
                     )   
+                    (setq w :and)
                 )
                 (if (equal n 0)
                     (setq cad (concatenate 'string cad " "))
@@ -236,7 +237,7 @@
             );;else caso base
             (if (equal w :and)
                 T
-                NIL
+                NIl
                 
             )
         )    
@@ -255,7 +256,7 @@
         (if (not (equal c NIL))
             (case (first c)
                 ('and ;;consulta compuesta
-                    (format t "Entro al parser opcion AND~%")
+                    ;;;(format t "Entro al parser opcion AND~%")
                     (setq caux (rest c))
                     (setq answ andy)
                     (if (listp (first caux))
@@ -264,7 +265,7 @@
                     
                 )
                 ('or ;;consulta compuesta
-                    (format t "Entro al parser opcion OR~%")
+                    ;;;(format t "Entro al parser opcion OR~%")
                     (setq caux (rest c))
                     (setq answ ordy)
                     (if (listp (first caux))
@@ -285,7 +286,7 @@
                             )
                             ;;else 
                             (progn
-                                (format t "Entro al parser opcion T~%")
+                                ;;;(format t "Entro al parser opcion T~%")
                                 (if (equal n 0)
                                     (setq answ andy)
                                 )
@@ -349,11 +350,11 @@
 
 (defun fase1 (c)
     (let ((funcion (first c)) (clase (second c)) (condiciones (third c)) (condi ()))
-        (format t "~% Funcion usada ~A ~%" funcion)
-        (format t "Clase solicitada ~A ~%" (rest clase));;DONE
-        (format t "Condiciones ~A ~% ~%" condiciones);;DONE
+        ;;;(format t "~% Funcion usada ~A ~%" funcion)
+        ;;;(format t "Clase solicitada ~A ~%" (rest clase));;DONE
+        ;;;(format t "Condiciones ~A ~% ~%" condiciones);;DONE
         (setq condi (parser condiciones))
-        (format t "~%Condicion ~A ~%" condi)
+        ;;;(format t "~%Condicion ~A ~%" condi)
         ;;(setq list-actual (first *k*))
         ;;(print list-actual)
         ;;(eval condi)
@@ -410,7 +411,7 @@
                     
                 )
             ) 
-            (format t "~% Consulta ~A ~% ~%" c)
+            ;;;(format t "~% Consulta ~A ~% ~%" c)
         )
     )
 )
