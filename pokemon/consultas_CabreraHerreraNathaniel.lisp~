@@ -49,15 +49,14 @@
 
 
 (defun showres (funcion)
-    (let ((aux()))
-     (case funcion
+    (case funcion
         (exist
             (if (equal tuplas ())
                 (progn
                     (print "FALSE")
                     (format t "~%~%"))
                 (progn 
-                    (print tuplas)
+                    tuplas
                     (format t "~% Numero de resultados ~A ~%" ntuplas)
                     (print "TRUE")
                 )
@@ -69,11 +68,13 @@
                     (print "TRUE")
                     (format t "~%~%"))
                 (progn
-                    
-                    ;;*k*-tuplas
-                    
-                    (print tuplas)
                     (print "FALSE")
+                    ;;*k*-tuplas
+                    (dolist (i tuplas)
+                        (setq *k* (delete i *k*))
+                    )
+                    (setq tuplas *k*)
+                    tuplas
                 )
             )
         )
@@ -85,18 +86,12 @@
                     (format t "~%~%"))
                 ;;falso
                 (progn
-                    
-                    (dolist (i *k*)
-                        (dolist (j tuplas)
-                            (if (not (equal j i))
-                                (progn (setq aux (append aux (list i))) (return))
-                                
-                            )    
-                        )
+                    (print "FALSE");;--------------------------------------
+                    (dolist (i tuplas)
+                        (setq *answ* (delete i *k*))
                     )
-                    (setq tuplas aux)
-                    (print tuplas)
-                    (print "FALSE")
+                    (setq tuplas *answ*)
+                    tuplas
                 )
             )
         )
@@ -108,18 +103,12 @@
                     (format t "~%~%"))
             ;,falso
                 (progn 
-                    
-                    (dolist (i *k*)
-                        (dolist (j tuplas)
-                            (if (not (equal j i))
-                                (progn (setq aux (append aux (list i))) (return))
-                                
-                            )    
-                        )
-                    )
-                    (setq tuplas aux)
-                    (print tuplas) 
                     (print "FALSE")
+                    (dolist (i tuplas)
+                        (setq *k* (delete i *k*))
+                    )
+                    (setq tuplas *k*)
+                    tuplas   
                 )
             )
          
@@ -127,8 +116,7 @@
         (T
             (print "Error PrintFun")
          )
-    )(setq funcion ()) 
-    )   
+    )    
 )
 
 
@@ -149,9 +137,8 @@
             (progn (push list-actual *answ*) (setq ntuplas (1+ ntuplas)))
         )
     )
-    ;;(setq tuplas *answ*)
-    ;;(print *answ*)
-    *answ*
+    (setq tuplas *answ*)
+    (print *answ*)
 )
 
 ;;============================================================
@@ -164,26 +151,32 @@
 ;;(setf nm (concatenate 'string (subseq nm 0 (search "and" nm)) (subseq nm (+ 3 (search "and" nm)) )));;prueba1
 (defun cor (fa cad &optional (n 0) (w t))
     (let* ( (andy (list 'and ))(ordy (list 'or )) (aux1 ()) (aux2 ()) (answ ()))
-        (if (not (equal cad ""))
+        (if (not (equal cad NIL))
             (progn 
-                (if (search "and" cad)    
-                    (progn 
-                        (setq cad (concatenate 'string (subseq cad 0 (search "and" cad)) " " (subseq cad (+ 3 (search "and" cad)) )))
-                        (setq w :and)
-                    )
-                )
-                (if (search "or" cad)
-                    (progn 
-                        (setq cad (concatenate 'string (subseq cad 0 (search "or" cad)) " " (subseq cad (+ 2 (search "or" cad)) )))
-                        (setq w :or)
-                    )   
-                )
                 (if (equal n 0)
-                    (setq cad (concatenate 'string cad " "))
-                    (case w
-                        (:and (setq answ andy) )
-                        (:or (setq answ ordy))
-                        (T )
+                    (progn 
+                        (if (search "and" cad)    
+                            (progn 
+                                (loop while (search "and" cad) do
+                                    (setf cad (concatenate 'string (subseq cad 0 (search "and" cad)) (subseq cad (+ 3 (search "and" cad)) )))
+                                )
+                                (setq w :and)
+                            )
+                        )
+                        (if (search "or" cad)
+                            (progn 
+                                (loop while (search "or" cad) do
+                                    (setf cad (concatenate 'string (subseq cad 0 (search "or" cad)) " " (subseq cad (+ 2 (search "or" cad)) )))
+                                )
+                                (setq w :or)
+                            )   
+                        )
+                        (setq cad (concatenate 'string cad " "))
+                        (case w
+                            (:and (setq answ andy) )
+                            (:or (setq answ ordy))
+                            (T (setq answ andy))
+                        )
                     )
                 )
 
@@ -193,12 +186,12 @@
                            (progn;;>= 
                                (setq aux2 (subseq cad 2 (search " " cad)))
                                (setq aux2 (parse-integer aux2))
-                               (setq answ (append answ (list '>= (list 'rest (list 'assoc (list 'quote fa) 'list-actual))  aux2)) )
+                               (setq answ (append answ (list (list '>=  (list 'assoc (list 'quote fa) 'list-actual)  aux2)) ))
                             )
                            (progn;;> 
                                (setq aux2 (subseq cad 1 (search " " cad)))
                                (setq aux2 (parse-integer aux2))
-                               (setq answ (append answ (list '> (list 'rest (list 'assoc (list 'quote fa) 'list-actual))  aux2)) )
+                               (setq answ (append answ (list (list '>  (list 'assoc (list 'quote fa) 'list-actual)  aux2)) ))
                             )
                        )
                     )
@@ -207,12 +200,12 @@
                            (progn;;>= 
                                (setq aux2 (subseq cad 2 (search " " cad)))
                                (setq aux2 (parse-integer aux2))
-                               (setq answ (append answ (list '<= (list 'rest (list 'assoc (list 'quote fa) 'list-actual))  aux2)) )
+                               (setq answ (append answ (list (list '<=  (list 'assoc (list 'quote fa) 'list-actual)  aux2)) ))
                             )
                            (progn;;>
                                (setq aux2 (subseq cad 1 (search " " cad)))
                                (setq aux2 (parse-integer aux2))
-                               (setq answ (append answ (list '< (list 'rest (list 'assoc (list 'quote fa) 'list-actual))  aux2)) )
+                               (setq answ (append answ (list (list '<  (list 'assoc (list 'quote fa) 'list-actual)  aux2)) ))
                             )
                        )
                     )
@@ -220,7 +213,7 @@
                        (progn;;!= 
                            (setq aux2 (subseq cad 2 (search " " cad)))
                            (setq aux2 (parse-integer aux2))
-                           (setq answ (append answ (list 'not (list '=  (list 'rest (list 'assoc (list 'quote fa) 'list-actual))  aux2)) ))
+                           (setq answ (append answ (list (list 'not (list '=  (list 'assoc (list 'quote fa) 'list-actual)  aux2)) )))
                         )
                     )
                     (T
@@ -228,16 +221,16 @@
                         (progn 
                            (setq aux2 (subseq cad 1 (search " " cad)))
                            (setq aux2 (parse-integer aux2))
-                           (setq answ (append answ (list '= (list 'rest (list 'assoc (list 'quote fa) 'list-actual))  aux2)) )
+                           (setq answ (append answ (list (list '=  (list 'assoc (list 'quote fa) 'list-actual)  aux2)) ))
                         )
                     )
                 )
-                (setq answ (append (list answ) (list (cor fa (subseq cad (1+ (search " " cad))) (1+ n) w))))
+                (setq answ (append answ (list (cor fa cad (1+ n) w))))
+                
             );;else caso base
             (if (equal w :and)
-                T
-                NIL
-                
+                (list T)
+                (list NIL)
             )
         )    
     )        
@@ -301,7 +294,7 @@
                                             (progn 
                                                 (setq auxstr (remove #\[ auxstr))
                                                 (setq auxstr (remove #\] auxstr))
-                                                (setq answ (append answ (cor fa auxstr)))                                                                                           
+                                                (setq answ (append answ (list (cor fa auxstr))))                                                                                            
                                             );;algo
                                             ;;else
                                             (progn    
@@ -397,9 +390,9 @@
         (loop while (eq fin 0) do
             (reset-all)
             (read-k "C:/Users/Nathaniel/Documents/GitHub/FIA_ejercicios/pokemon/knowledge.txt")
-            (print "Igrese consulta:")
+            (princ "Igrese consulta:")
             (setq c (read))
-            ;;(print "H")  
+            (print "H")  
             (if (equal c nil)
                 (format t "No ha ingresado nada, por favor ingrese una consulta")
                 ;;Else
@@ -416,7 +409,7 @@
 )
 
 ;Ejemplo de consulta simple
-;(exist (clase . pokemon) ((tipo1 . hierba)))
+;(exist (clase . pokemon) ((tipo1 . hierva)))
 ;(d-exist (clase . pokemon) ((num . [>700])))
 ;(4all (clase . pokemon) ((num . [>700])))
 ;(not-4all (clase . pokemon) ((num . [>700])))
