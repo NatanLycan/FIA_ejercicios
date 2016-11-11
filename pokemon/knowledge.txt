@@ -155,5 +155,14 @@
 ((clase . pokemon) (id . 149) (num . 149) (nombre . Dragonite) (tipo1 . dragon) (tipo2 . volador))
 ((clase . pokemon) (id . 150) (num . 150) (nombre . Mewtwo) (tipo1 . psyquico) (tipo2 . x))
 ((clase . pokemon) (id . 151) (num . 151) (nombre . Mew) (tipo1 . psyquico) (tipo2 . x))
-
+((clase . evoluciona) (id . 152) (p1 . bulbasaur) (p2 . ivysaur))
+((clase . evoluciona) (id . 153) (p1 . ivysaur) (p2 . venusaur))
+((clase . evoluciona) (id . 154) (p1 . charmander) (p2 . charmeleon))
+((clase . evoluciona) (id . 155) (p1 . charmeleon) (p2 . charizard))
+((clase . evoluciona) (id . 156) (p1 . squirtle) (p2 . wartortle))
+((clase . evoluciona) (id . 157) (p1 . wartortle) (p2 . blastoise))
+((clase . evoluciona) (id . 158) (p1 . caterpie) (p2 . metapod))
+((clase . evoluciona) (id . 159) (p1 . metapod) (p2 . butterfree))
+((clase . evoluciona) (id . 160) (p1 . weedle) (p2 . kakuna))
+((clase . evoluciona) (id . 161) (p1 . kakuna) (p2 . beedrill))
 
