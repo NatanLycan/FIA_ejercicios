@@ -29,49 +29,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 
 (defpackage #:retriever-tests
-  (:use #:common-lisp #:lisp-unit #:retriever)
+  (:use #:common-lisp  #:retriever)
   )
 
-;;(in-package :retriever-tests)
-
-;;zebra
-(defparameter *zebra*
-    '(
-        ;;REGLAS DE PRODUCCION
-      
-      ;;vecinos, si x es casa & y esta junto x -> y es casa & x esta junto y 
-      (<- (junto ?y ?x) (casa ?x) (junto ?x ?y) (casa ?y))
-      ;;casas
-        ;;(<- (ancestor ?x ?y) (parent ?x ?y))   ----aun no
-      ;;posicion dado nacionalidad
-      (<- (duenio ?x ?y) (nacionalidad ?x) (nacionalidad-posicion ?x ?y) (casa ?y))
-      ;;bebida dado posicion
-      (<- (bebida ?x) (posicion-bebe ?y ?x) (casa ?y))
-      ;;color vecino dado nacionalidad
-      (<- (color ?w) (de-color ?y ?w) (junto ?y ?x) (duenio ?z ?y) (nacionalidad-junto-color ?z ?w))
-        ;;HECHOS
-      (<- (nacionalidad-vive-color  Ingles  Rojo))
-      (<- (nacionalidad-tiene       Español Perror))
-      (<- (color-bebe               Verde   Cafe))
-      (<- (nacionalidad-bebe        Ukraniano Te))
-      (<- (color-junto-color        Verde   Blanco))
-      (<- (fumador-tiene            OldGold Caracol))
-      (<- (color-fuma               Amarillo Kools))
-      (<- (posicion-bebe            3       Leche));;-------------:D
-      (<- (nacionalidad-posicion    Noruego 1));;-----------------:D
-      (<- (fumador-junto-tiene      Chesterfields   Zorro))
-      (<- (fumador-junto-tiene      Kools   Caballo))
-      (<- (fumador-bebe             LuckyStrike Jugo))
-      (<- (nacionalidad-fuma        Japones Parliaments))
-      (<- (nacionalidad-junto-color Noruego Azul));;--------------:D
-      (<- (junto                  2   1))
-      (<- (junto                  3   2))
-      (<- (junto                  4   3))
-      (<- (junto                  5   4))
-      (<- (casa                   1))
-      ))
-
-
+(in-package :retriever-tests)
 
 ;;; Simple ancestry-type knowledge base.
 ;;;
