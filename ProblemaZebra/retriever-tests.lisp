@@ -34,41 +34,49 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 ;;(in-package :retriever-tests)
 
-;;zebra
+;;zebra------(casa pos nacionalidad mascota cigarrillo bebida color)
 (defparameter *zebra*
     '(
-        ;;REGLAS DE PRODUCCION
+        ;;REGLAS
       
-      ;;vecinos, si x es casa & y esta junto x -> y es casa & x esta junto y 
-      (<- (junto ?y ?x) (casa ?x) (junto ?x ?y) (casa ?y))
-      ;;casas
-        ;;(<- (ancestor ?x ?y) (parent ?x ?y))   ----aun no
-      ;;posicion dado nacionalidad
-      (<- (duenio ?x ?y) (nacionalidad ?x) (nacionalidad-posicion ?x ?y) (casa ?y))
-      ;;bebida dado posicion
-      (<- (bebida ?x) (posicion-bebe ?y ?x) (casa ?y))
-      ;;color vecino dado nacionalidad
-      (<- (color ?w) (de-color ?y ?w) (junto ?y ?x) (duenio ?z ?y) (nacionalidad-junto-color ?z ?w))
-        ;;HECHOS
-      (<- (nacionalidad-vive-color  Ingles  Rojo))
-      (<- (nacionalidad-tiene       Español Perror))
-      (<- (color-bebe               Verde   Cafe))
-      (<- (nacionalidad-bebe        Ukraniano Te))
-      (<- (color-junto-color        Verde   Blanco))
-      (<- (fumador-tiene            OldGold Caracol))
-      (<- (color-fuma               Amarillo Kools))
-      (<- (posicion-bebe            3       Leche));;-------------:D
-      (<- (nacionalidad-posicion    Noruego 1));;-----------------:D
-      (<- (fumador-junto-tiene      Chesterfields   Zorro))
-      (<- (fumador-junto-tiene      Kools   Caballo))
-      (<- (fumador-bebe             LuckyStrike Jugo))
-      (<- (nacionalidad-fuma        Japones Parliaments))
-      (<- (nacionalidad-junto-color Noruego Azul));;--------------:D
-      (<- (junto                  2   1))
-      (<- (junto                  3   2))
-      (<- (junto                  4   3))
-      (<- (junto                  5   4))
-      (<- (casa                   1))
+      (<- (junto ?x ?y) (junto ?y ?x));;vecinos
+      
+        ;;HECHOS(casa pos nacionalidad mascota cigarrillo bebida color)
+      (<- (casa 1 ?b ?c ?d ?e ?f));;1
+      (<- (casa 2 ?b ?c ?d ?e ?f));;1
+      (<- (casa 3 ?b ?c ?d ?e ?f));;1
+      (<- (casa 4 ?b ?c ?d ?e ?f));;1
+      (<- (casa 5 ?b ?c ?d ?e ?f));;1
+      (<- (junto 1 2));;1.5
+      (<- (junto 2 3));;1.5
+      (<- (junto 3 4));;1.5
+      (<- (junto 4 5));;1.5
+      (<- (casa ?a Ingles ?c ?d ?e Rojo));;2
+      (<- (casa ?a Español Perro ?d ?e ?f));;3
+      (<- (casa ?a ?b ?c ?d Café Verde));;4
+      (<- (casa ?a Ukraniano ?c ?d Té ?f));;5
+      (<- (junto ?a1 ?a2) 
+          (casa ?a1 ?b1 ?c1 ?d1 ?e1 verde)
+          (casa ?a2 ?b2 ?c2 ?d2 ?e2 blanco));;6
+      (<- (casa ?a ?b Caracol OldGold ?e ?f));;7
+      (<- (casa ?a ?b ?c Kools ?e Amarillo));;8
+      (<- (casa 3 ?b ?c ?d Leche ?f));;9
+      (<- (casa 1 Noruego ?c ?d ?e ?f));;10
+      (<- (junto ?a1 ?a2) 
+          (casa ?a1 ?b1 ?c1 Chesterfields ?e1 ?f1) 
+          (casa ?a2 ?b2 Zorro ?d2 ?e2 ?f2));;11
+      (<- (junto ?a1 ?a2) 
+          (casa ?a1 ?b1 ?c1 Kools ?e1 ?f1) 
+          (casa ?a2 ?b2 Caballo ?d2 ?e2 ?f2));;12
+      (<- (casa ?a ?b ?c LuckyStrike Jugo ?f));;13
+      (<- (casa ?a Japones ?c Parliaments ?e ?f));;14
+      (<- (junto ?a1 ?a2) 
+          (casa ?a ?b ?c ?d ?e Azul) 
+          (casa Noruego ?b ?c ?d ?e ?f));;15
+      
+      ;;Pregunta
+      (<- (casa ?a ?b ?c ?d Agua ?f));agua
+      (<- (casa ?a ?b Zebra ?d ?e ?f));zebra
       ))
 
 
