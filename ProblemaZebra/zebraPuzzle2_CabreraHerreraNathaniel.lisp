@@ -6,6 +6,38 @@
       (<- (posicion 3))
       (<- (posicion 4))
       (<- (posicion 5))
+      
+      ;;----------Colores conocidos
+      (<- (colort Azul))
+      (<- (colort Verde))
+      (<- (colort Amarillo))
+      (<- (colort Blanco))
+      (<- (colort Rojo))
+      ;;----------Mascotas conocidas
+      (<- (mascot Perro))
+      (<- (mascot Caballo))
+      (<- (mascot Zorro))
+      (<- (mascot Caracol))
+      (<- (mascot ?x))
+      ;;----------Nacionalidades conocidas
+      (<- (naciot Español))
+      (<- (naciot Ingles))
+      (<- (naciot Ukraniano))
+      (<- (naciot Japones))
+      (<- (naciot Noruego))
+      ;;----------Bebidas conocidas
+      (<- (bebidt Jugo))
+      (<- (bebidt Te))
+      (<- (bebidt Cafe))
+      (<- (bebidt Leche))
+      ;;---------Cigarros conocidos
+      (<- (cigart OldGold))
+      (<- (cigart Kools))
+      (<- (cigart Chestefields))
+      (<- (cigart LuckyStrike))
+      (<- (cigart Parliaments))
+      
+      
       (<- (junto 1 2));;1.5
       (<- (junto 2 1));;1.5
       (<- (junto 2 3));;1.5
@@ -40,7 +72,15 @@
       (<- (casa ?a ?b ?c LuckyStrike Jugo ?f));;13
       (<- (casa ?a Japones ?c Parliaments ?e ?f));;14
       
-   
+      #|(<- (casa ?a ?n ?c ?d ?e ?f) (naciot ?n))
+      (<- (casa ?a ?b ?n ?d ?e ?f) (mascot ?n))
+      (<- (casa ?a ?b ?c ?n ?e ?f) (cigart ?n))
+      (<- (casa ?a ?b ?c ?d ?n ?f) (bebidt ?n))
+      (<- (casa ?a ?b ?c ?d ?e ?n) (colort ?n))|#
+      
+      (<- (casa ?a ?b ?c ?d ?e ?f) (posicion ?a) (naciot ?b) (mascot ?c) (cigart ?d) (bebidt ?e) (colort ?f))
+      
+      
       ;;Pregunta
       ;;(<- (casa ?a ?b ?c ?d Agua ?f));;agua
       ;;(<- (casa ?a ?b Zebra ?d ?e ?f));;zebra
