@@ -78,7 +78,7 @@
       (<- (casa ?a ?b ?c ?d ?n ?f) (bebidt ?n))
       (<- (casa ?a ?b ?c ?d ?e ?n) (colort ?n))|#
       
-      (<- (casa ?a ?b ?c ?d ?e ?f) (posicion ?a) (naciot ?b) (mascot ?c) (cigart ?d) (bebidt ?e) (colort ?f))
+      ;;(<- (casa ?a ?b ?c ?d ?e ?f) (posicion ?a) (naciot ?b) (mascot ?c) (cigart ?d) (bebidt ?e) (colort ?f))
       
       
       ;;Pregunta
